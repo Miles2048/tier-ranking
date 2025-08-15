@@ -3,8 +3,6 @@
   import Motion from '@/components/motion'
   import { useMessage } from 'naive-ui'
 
-  import { wxRewards } from '@/views/home/rewards'
-
   const emits = defineEmits(['handleDownLoad'])
 
   const message = useMessage()
@@ -12,7 +10,7 @@
   const homeStore = useHomeStore()
 
   const goGithub = () => {
-    window.open('https://github.com/zhoufanglu/simple-maker/tree/main', '_blank')
+    window.open('https://github.com/Miles2048/tier-ranking', '_blank')
   }
 
   const handleDownLoad = async () => {
@@ -72,17 +70,12 @@
       tip: '加入qq讨论群',
       click: () => {
         window.open(
-          'https://qm.qq.com/cgi-bin/qm/qr?k=hKBXKNil-4hCYjqwXZYXk6x55pjLVg7l&jump_from=webapi&authKey=jeeNxVzsPVLxFjAOBOE8zI9R3pLAc8lUnXS5aScIoGSXIjPLLok9deDZV2hI1Syv',
+          'https://qm.qq.com/cgi-bin/qm/qr?k=YOUR_NEW_QQ_GROUP_KEY',
           '_blank',
         )
       },
     },
   ])
-
-  // 计算总金额
-  const totalMoney = computed(() => {
-    return wxRewards.reduce((sum, item) => sum + parseFloat(item.money), 0)
-  })
 </script>
 <template>
   <div class="p-header">
@@ -125,29 +118,9 @@
         </div>
       </template>
       <div class="buy-coffee-content">
-        <n-tabs type="line" animated>
-          <n-tab-pane name="二维码" tab="二维码">
-            <n-image :height="562 / 2" :width="424 / 2" :src="wxQR" />
-          </n-tab-pane>
-          <n-tab-pane name="打赏记录" tab="打赏记录">
-            <div class="reward-panel">
-              <n-timeline style="height: 400px; overflow-y: scroll">
-                <n-timeline-item
-                  v-for="(i, index) in wxRewards"
-                  :key="index"
-                  type="info"
-                  :title="i.name"
-                  :content="`¥ ${i.money}`"
-                  :time="i.time"
-                />
-              </n-timeline>
-              <div class="total-row">
-                <span>总计:</span>
-                <span>{{ totalMoney.toFixed(2) }}</span>
-              </div>
-            </div>
-          </n-tab-pane>
-        </n-tabs>
+        <div class="qr-code-only">
+          <n-image :height="562 / 2" :width="424 / 2" :src="wxQR" />
+        </div>
       </div>
     </n-modal>
   </div>
@@ -195,34 +168,9 @@
     }
     .buy-coffee-content {
       // border: solid 1px red;
-      .n-tab-pane {
+      .qr-code-only {
         @include vertical-center;
-        .n-timeline-item-content__content {
-          color: #5386ed;
-          font-weight: bolder;
-          font-family: ALIMAMAFONT;
-        }
-        .reward-panel {
-          width: 100%;
-          h4 {
-            margin-top: 6px;
-            font-weight: bolder;
-            font-family: ALIMAMAFONT;
-          }
-          .total-row {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            span:first-child {
-              margin-right: 10px;
-            }
-            span:last-child {
-              color: #5386ed;
-              font-weight: bolder;
-              font-family: ALIMAMAFONT;
-            }
-          }
-        }
+        padding: 20px 0;
       }
     }
   }

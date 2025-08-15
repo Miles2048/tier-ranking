@@ -27,6 +27,11 @@ const useOneClickImport = () => {
       name: '融合版究级植物-PVZ-RH',
       imgs: getImgPathList('PVZ-RH'),
     },
+    {
+      logo: getImageUrl('games'),
+      name: '游戏合集',
+      imgs: getImgPathList('games'),
+    },
   ]
 
   function getImgPathList(folderName: FolderName) {
@@ -44,6 +49,9 @@ const useOneClickImport = () => {
         break
       case 'PVZ-RH':
         imageFiles = import.meta.glob('@/assets/imgs/PVZ-RH/*.png', { eager: true })
+        break
+      case 'games':
+        imageFiles = import.meta.glob('@/assets/imgs/games/*.{png,jpg}', { eager: true })
         break
     }
     return Object.values(imageFiles).map((module) => module.default)
