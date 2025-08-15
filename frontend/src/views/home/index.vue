@@ -59,7 +59,7 @@
       context.drawImage(img, 0, 0)
 
       // 设置水印样式
-      const watermarkText = 'simple-maker.fun'
+      const watermarkText = 'tier-ranking'
       const fontSize = 20 // 字体大小
       const padding = 12 // 水印距离图片边界的间距
       context.font = `${fontSize}px ALIMAMAFONT`

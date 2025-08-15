@@ -1,11 +1,11 @@
-# 易排(simple-maker)
+# Tier Ranking
 - 一个自定义排名的工具，例如LOL英雄T级排行榜。  
 - 高度自定义排序，拖拽排序，自定义等级，自定义图片等。
 
 - A custom ranking tool, such as LOL hero T-level leaderboard。
 -  Height custom sort, drag 和 drop sort, custom level, custom picture, etc.
 # 官网(website)
-- [simple-maker](http://simple-maker.fun)
+- [tier-ranking](https://miles2048.github.io/tier-ranking/)
 
 # 界面 (overview) 
 ![home](https://github.com/Miles2048/tier-ranking/blob/main/preview/app-use-times.png)
