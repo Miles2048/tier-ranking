@@ -42,5 +42,4 @@ Thanks to [everyone](https://github.com/Miles2048/tier-ranking/graphs/contributo
 - [app-icons](https://appicons.co/?ref=pushkeen)
 - [League_Of_Legends_Assets](https://github.com/TheePepS/League_Of_Legends_Assets)
 
-# Star History
-[![Star History Chart](https://api.star-history.com/svg?repos=zhoufanglu/simple-maker&type=Date)](https://www.star-history.com/#zhoufanglu/simple-maker&Date)
+

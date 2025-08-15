@@ -7,6 +7,8 @@
 
   const message = useMessage()
   const wxQR = new URL('@/assets/imgs/pay/wxQR.JPG', import.meta.url).href
+  const qqContact = new URL('@/assets/imgs/con_me/qq.jpg', import.meta.url).href
+  const telegramContact = new URL('@/assets/imgs/con_me/telegram.jpg', import.meta.url).href
   const homeStore = useHomeStore()
 
   const goGithub = () => {
@@ -29,6 +31,8 @@
   }
 
   const modalVisible = ref(false)
+  const qqModalVisible = ref(false)
+  const telegramModalVisible = ref(false)
 
   const rightOperateButtons = ref([
     {
@@ -66,13 +70,17 @@
       click: () => goGithub(),
     },
     {
-      icon: '&#xe882;',
-      tip: '加入qq讨论群',
+      icon: 'telegram-custom',
+      tip: 'Telegram联系',
       click: () => {
-        window.open(
-          'https://qm.qq.com/cgi-bin/qm/qr?k=YOUR_NEW_QQ_GROUP_KEY',
-          '_blank',
-        )
+        telegramModalVisible.value = true
+      },
+    },
+    {
+      icon: '&#xe882;',
+      tip: 'QQ联系',
+      click: () => {
+        qqModalVisible.value = true
       },
     },
   ])
@@ -98,7 +106,17 @@
         <n-tooltip v-for="(btn, index) in rightOperateButtons" :key="index" :delay="500">
           <template #trigger>
             <n-button quaternary type="info" @click="btn.click()">
-              <i class="iconfont" v-html="btn.icon"></i> </n-button
+              <i 
+                v-if="btn.icon !== 'telegram-custom'" 
+                class="iconfont" 
+                v-html="btn.icon"
+              ></i>
+              <div 
+                v-else 
+                class="telegram-icon-custom"
+                :style="{ backgroundImage: 'url(/img/telegram-icon.jpg)' }"
+              ></div>
+            </n-button
           ></template>
           {{ btn.tip }}
         </n-tooltip>
@@ -120,6 +138,44 @@
       <div class="buy-coffee-content">
         <div class="qr-code-only">
           <n-image :height="562 / 2" :width="424 / 2" :src="wxQR" />
+        </div>
+      </div>
+    </n-modal>
+    <!--? QQ Contact-->
+    <n-modal
+      v-model:show="qqModalVisible"
+      class="qq-contact-model"
+      :bordered="false"
+      preset="dialog"
+      title="Dialog"
+    >
+      <template #header>
+        <div class="header">
+          <div>📞 联系我</div>
+        </div>
+      </template>
+      <div class="qq-contact-content">
+        <div class="qr-code-only">
+          <n-image :height="400" :width="300" :src="qqContact" object-fit="contain" />
+        </div>
+      </div>
+    </n-modal>
+    <!--? Telegram Contact-->
+    <n-modal
+      v-model:show="telegramModalVisible"
+      class="telegram-contact-model"
+      :bordered="false"
+      preset="dialog"
+      title="Dialog"
+    >
+      <template #header>
+        <div class="header">
+          <div>📱 Telegram联系</div>
+        </div>
+      </template>
+      <div class="telegram-contact-content">
+        <div class="qr-code-only">
+          <n-image :height="400" :width="300" :src="telegramContact" object-fit="contain" />
         </div>
       </div>
     </n-modal>
@@ -154,6 +210,14 @@
       .mode-icon {
         font-size: 26px;
       }
+      .telegram-icon-custom {
+        width: 24px;
+        height: 24px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+      }
     }
   }
 </style>
@@ -168,6 +232,38 @@
     }
     .buy-coffee-content {
       // border: solid 1px red;
+      .qr-code-only {
+        @include vertical-center;
+        padding: 20px 0;
+      }
+    }
+  }
+  
+  .qq-contact-model {
+    width: 468px;
+    position: fixed;
+    top: 20%;
+    left: calc(50% - 234px);
+    .n-dialog__icon {
+      display: none !important;
+    }
+    .qq-contact-content {
+      .qr-code-only {
+        @include vertical-center;
+        padding: 20px 0;
+      }
+    }
+  }
+  
+  .telegram-contact-model {
+    width: 468px;
+    position: fixed;
+    top: 20%;
+    left: calc(50% - 234px);
+    .n-dialog__icon {
+      display: none !important;
+    }
+    .telegram-contact-content {
       .qr-code-only {
         @include vertical-center;
         padding: 20px 0;
